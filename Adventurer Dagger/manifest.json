@@ -1,0 +1,24 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "Adventurer Dagger",
+		"description": "Adventurer Dagger Resource Pack",
+		"uuid": "9551101f-f2fa-e428-0ab6-fa8ae7e49258",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"authors": ["anidiotnon"],
+		"generated_with": {
+			"blockbench_item_wizard": ["1.0.2"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Adventurer Dagger",
+			"type": "resources",
+			"uuid": "596e79f7-d342-52e5-8695-eed38a9ffcb5",
+			"version": [1, 0, 0]
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"entity_sounds": {
+		"entities": {
+			"myname:fallen_adventurer": {
+				"events": {
+					"ambient": "mob.drowned.say",
+					"ambient.in.water": "mob.drowned.say_water",
+					"death": "mob.drowned.death",
+					"death.in.water": "mob.drowned.death_water",
+					"hurt": "mob.drowned.hurt",
+					"hurt.in.water": "mob.drowned.hurt_water",
+					"step": "mob.drowned.step"
+				},
+				"pitch": [0.8, 1.2],
+				"volume": 1
+			}
+		}
+	}
+}
