@@ -1,9 +1,9 @@
 {
 	"format_version": 2,
 	"header": {
-		"name": "Fallen Adventurers",
-		"description": "Fallen Adventurers Resource Pack",
-		"uuid": "dc24b195-bd71-0e17-fce6-dcebedfd7880",
+		"name": "Fallen Sniper",
+		"description": "Fallen Sniper Resource Pack",
+		"uuid": "53dce64d-0335-a1ea-fdea-3ec70b64524b",
 		"version": [1, 0, 0],
 		"min_engine_version": [1, 16, 0]
 	},
@@ -14,9 +14,9 @@
 	},
 	"modules": [
 		{
-			"description": "Fallen Adventurers",
+			"description": "Fallen Sniper",
 			"type": "resources",
-			"uuid": "51cab1f1-35ca-ae0b-33d1-7ffb4671ef60",
+			"uuid": "d2a6f31d-3025-c6c8-ac43-fa9b9c123ef0",
 			"version": [1, 0, 0]
 		}
 	]
