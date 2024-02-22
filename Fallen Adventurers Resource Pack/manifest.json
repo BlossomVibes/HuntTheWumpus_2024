@@ -1,0 +1,23 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "Fallen Adventurers",
+		"description": "Fallen Adventurers Resource Pack",
+		"uuid": "dc24b195-bd71-0e17-fce6-dcebedfd7880",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"generated_with": {
+			"blockbench_entity_wizard": ["1.3.1"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Fallen Adventurers",
+			"type": "resources",
+			"uuid": "51cab1f1-35ca-ae0b-33d1-7ffb4671ef60",
+			"version": [1, 0, 0]
+		}
+	]
+}

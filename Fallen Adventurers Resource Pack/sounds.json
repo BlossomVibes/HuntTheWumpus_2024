@@ -1,0 +1,23 @@
+{
+	"entity_sounds": {
+		"entities": {
+			"myname:fallen_sniper": {
+				"events": {
+					"ambient": "mob.skeleton.say",
+					"death": "mob.skeleton.death",
+					"hurt": {
+						"sound": "mob.skeleton.hurt",
+						"volume": 0.7
+					},
+					"step": {
+						"pitch": 1,
+						"sound": "mob.skeleton.step",
+						"volume": 1
+					}
+				},
+				"pitch": [0.8, 1.2],
+				"volume": 1
+			}
+		}
+	}
+}
