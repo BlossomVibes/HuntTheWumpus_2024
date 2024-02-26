@@ -1,0 +1,1 @@
+titleraw @p {"rawtext":[{"text":"§4Welcome to HUNT THE WUMPUS"}]}
