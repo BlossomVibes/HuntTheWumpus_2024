@@ -1,0 +1,5 @@
+pack.name=Angry Cow RP (Unstable)
+pack.description=Resource Pack Dependency for Angry Cow Behavior Pack
+
+entity.my_name:angry_cow.name=Angry Cow
+item.spawn_egg.entity.my_name:angry_cow.name=Spawn Angry Cow
