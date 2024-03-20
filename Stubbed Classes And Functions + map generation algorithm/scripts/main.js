@@ -214,6 +214,43 @@ let g = 16;
 let h = 17;
 let x = false;
 
+// copy arena is our second randomized room generation algorithm, where a preset map is saved onto another part of the world, where it can be easily copied into our arena.
+// the function takes 3 parameters, starx, starty, startz, (the end coordinates are the borders of the arena.), the coordinates of the region you want to copy to your arena.
+function CopyArena (startx, starty, startz) {
+    world.sendMessage("generating");
+    var arenaX = 0;
+    var arenaY = 0;
+    var arenaZ = 0;
+    // these three variables are the arena block we will replace
+    var endx = startx + 30;
+    var endy = starty + 15;
+    var endz = startx + 30;
+    
+    var arenaBlock;
+    var curMapBlock;
+    for (let x1 = startx; x1 <= endx; x1++) {
+        for (let y1 = starty; y1 <= endy; y1++) {
+            for (let z1 = startz; z1 <= endz; z1++) {
+                
+                arenaX = x1 - startx;
+                arenaY = y1 - starty;
+                arenaZ = z1 - startz;
+                //world.sendMessage("good");
+
+                curMapBlock = world.getDimension ("overworld").getBlock({x: x1, y: y1, z: z1});
+                arenaBlock = world.getDimension("overworld").getBlock({x: arenaX, y: arenaY, z: arenaZ});
+
+              //  world.sendMessage("good");
+
+                var curBlock = curMapBlock.permutation;
+                arenaBlock.setPermutation(curBlock);
+              //  world.sendMessage("good");
+            }
+        }
+    }
+    world.sendMessage("sucessful generation");
+    // a alternate way to debug that doesn't require debugger is to just use print statements to see where the code eexecutes properly;
+}
 function mainTick() {
     if (system.currentTick % 150 === 0) {
         world.sendMessage("world");
@@ -221,5 +258,5 @@ function mainTick() {
     system.run(mainTick);
 }
 //system.run(initializeRooms);
-system.run(generateArena(10, -50, 10, 40, -45, 40));
-//system.run(mainTick);
+//system.run(generateArena(10, -50, 10, 40, -45, 40));
+system.run(CopyArena(30, 1, 30));
