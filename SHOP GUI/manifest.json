@@ -1,0 +1,51 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Wumpus Shop Gui",
+    "name": "Wumpus Shop Gui",
+    "uuid": "27cc36ba-8e90-4b0b-906a-2351fba5966f",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      16,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "description": "Wumpus Shop Gui",
+      "type": "data",
+      "uuid": "7900e417-d2b7-435a-95f2-a5028de9c741",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+        "type": "script",
+        "uuid": "bf9bfb1a-1bf1-43f0-b1f1-17b4dc802b21",
+        "version": [
+            1,
+            0,
+            0
+        ],
+        "language": "javascript",
+        "entry": "scripts/main.js"
+    }
+  ],
+    "dependencies": [
+      {
+          "module_name": "@minecraft/server",
+          "version": "1.3.0"
+      },
+      {
+        "module_name": "@minecraft/server-ui",
+        "version": "1.0.0"
+      }
+   ]
+}
