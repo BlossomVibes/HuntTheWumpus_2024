@@ -1,0 +1,70 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "wumpus:wumpus",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:movement": {
+				"value": 0.6,
+				"max": 0.6
+			},
+			"minecraft:physics": {
+				"has_gravity": true,
+				"has_collision": true
+			},
+			"minecraft:pushable": {
+				"is_pushable": false
+			},
+			"minecraft:push_through": {
+				"value": 1
+			},
+			"minecraft:health": {
+				"value": 150,
+				"max": 150
+			},
+			"minecraft:attack_damage": {
+				"value": 8,
+				"max": 8
+			},
+			"minecraft:behavior.nearest_attackable_target": {
+				"priority": 2,
+				"attack_interval": 0,
+				"attack_interval_min": 0,
+				"attack_owner": false,
+				"must_reach": false,
+				"must_see": false,
+				"must_see_forget_duration": 3,
+				"persist_time": 50,
+				"reselect_targets": false,
+				"scan_interval": 10,
+				"set_persistent": false,
+				"target_invisible_multiplier": 0.7,
+				"target_search_height": -1,
+				"target_sneak_visibility_multiplier": 0.8,
+				"within_radius": 0
+			},
+			"minecraft:boss": {
+				"hud_range": 75,
+				"name": "Wumpus",
+				"should_darken_sky": false
+			}
+			,
+			"minecraft:behavior.melee_attack": {
+				"priority": 0,
+				"melee_fov": 90,
+				"track_target": true,
+				"attack_types": "player",
+				"random_stop_interval": 0,
+				"reach_multiplier": 2,
+				"attack_once": false,
+				"require_complete_path": false,
+				"cooldown_time": 0.4
+			}
+			
+		}
+	}
+}

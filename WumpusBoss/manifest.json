@@ -1,0 +1,29 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "WumpusBoss",
+		"description": "WumpusBoss Behavior Pack",
+		"uuid": "8f4f2ab5-069d-0cc4-7911-6ac4a9abe21c",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"generated_with": {
+			"blockbench_entity_wizard": ["1.3.2"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Behavior",
+			"version": [1, 0, 0],
+			"uuid": "e5847913-502b-33e4-c78a-ecc115d0a855",
+			"type": "data"
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "3bc255e0-28bf-d6f5-8c4b-50adc0048743",
+			"version": [1, 0, 0]
+		}
+	]
+}
