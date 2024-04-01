@@ -7,7 +7,14 @@ var player = playerList[0];
 
 var amberRunes;
 var amberRuneCount = 25;
+var goldRunes;
+var goldRuneCount = 0;
+var diamondRunes;
+var diamondRuneCount = 0;
 var curDimension = world.getDimension("overworld");
+var rngNumber = 0;
+var amberBlock = world.getDimension("overworld").getBlock({x: -27, y: -56, z: 2});
+var amberPermutation = amberBlock.permutation;
 
 function IniltializeScore () {
 
@@ -17,7 +24,58 @@ function IniltializeScore () {
     }
     amberRunes.setScore(player, 25);
     amberRuneCount = 25;
+
+    goldRunes = world.scoreboard.getObjective("gold");
+    if (!goldRunes) {
+        goldRunes = world.scoreboard.addObjective("gold", "gold runes : ");
+    }
+    diamondRunes = world.scoreboard.getObjective("diamond");
+
+    if (!diamondRunes) {
+        diamondRunes = world.scoreboard.addObjective("diamond", "diamond runes : ");
+    }
 }
+
+function OpenAmberCrate () {
+    rngNumber = Math.ceil(Math.random() * 100);
+
+    var amberGiveAmount = 0; // rolls randomly the amoutn of amber runes the player gains.
+    var goldGiveAmount = 0;
+    // first, roll for gold
+
+    if (rngNumber <= 5) {
+        goldGiveAmount = 1;
+    }
+    rngNumber = Math.ceil(Math.random() * 100);
+
+    // now, roll for amber
+
+    if (rngNumber <= 10) {
+        amberGiveAmount = 25;
+    }
+    else if (rngNumber <= 30) {
+        amberGiveAmount = 20;
+    }
+    else if (rngNumber <= 55) {
+        amberGiveAmount = 15;
+    }
+    else if (rngNumber <= 80) {
+        amberGiveAmount = 10;
+    }
+    else {
+        amberGiveAmount = 5;
+    }
+
+    world.sendMessage("You Gained " + amberGiveAmount.toString() + " Amber Runes!");
+    world.sendMessage("You Gained " + goldGiveAmount.toString() + " Gold Runes!");
+
+    amberRuneCount += amberGiveAmount;
+    goldRuneCount += goldGiveAmount;
+
+    amberRunes.setScore(player, amberRuneCount);
+    goldRunes.setScore(player, goldRuneCount);
+}
+
 
 function openShop () {
    // Scoreboard.addObjective("amberRunes", "amberRunes");
@@ -133,6 +191,11 @@ function openShop () {
 world.beforeEvents.itemUse.subscribe(event => {
     if (event.itemStack.typeId === "minecraft:stick" && event.itemStack.nameTag === "Shop Opener") {
         system.run(openShop);
+    };
+});
+world.afterEvents.playerBreakBlock.subscribe(event => {
+    if (event.brokenBlockPermutation.matches("myname:amber_crate")) {
+        system.run(OpenAmberCrate);
     };
 });
 function mainTick () {
