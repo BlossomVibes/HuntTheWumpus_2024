@@ -1,0 +1,23 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "WumpusBoss",
+		"description": "WumpusBoss Resource Pack",
+		"uuid": "3bc255e0-28bf-d6f5-8c4b-50adc0048743",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"generated_with": {
+			"blockbench_entity_wizard": ["1.3.2"]
+		}
+	},
+	"modules": [
+		{
+			"description": "WumpusBoss",
+			"type": "resources",
+			"uuid": "18c7d128-e73b-3af1-826c-22bcfe093e3e",
+			"version": [1, 0, 0]
+		}
+	]
+}

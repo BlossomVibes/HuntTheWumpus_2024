@@ -1,0 +1,22 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "wumpus:wumpus",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/entity/wumpus"
+			},
+			"geometry": {
+				"default": "geometry.wumpus"
+			},
+			"render_controllers": ["controller.render.default"],
+			"spawn_egg": {
+				"base_color": "#b5f20b",
+				"overlay_color": "#465696"
+			}
+		}
+	}
+}
