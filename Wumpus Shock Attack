@@ -88,20 +88,9 @@ var originalBlockTypes = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],
 [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],];
 var count = 0;
 var playerDelay = 0;
+var molang;
+var aliveMinions = 0;
 
-for (let i = 1; i <= 50; i++) {
-    for (let j = 1; j <= 50; j ++) {
-        curBlock = world.getDimension("overworld").getBlock({x: i, y: -60, z: j});
-
-        curPermutation = curBlock.permutation;
-       
-        count++;
-
-      //  world.sendMessage(count.toString());
-
-        originalBlockTypes[i].push(curPermutation);
-    }
-}
 world.sendMessage(".");
 var curPermutation = BlockPermutation.resolve("minecraft:gold_block");
 
@@ -116,8 +105,8 @@ var curY = -60;
 
 var seaLanternPermutation = BlockPermutation.resolve("minecraft:sea_lantern");
 function ShockInitialize () {
-    for (var x = 1; x <= 50; x += 3) {
-        for (var z = 1; z <= 50; z += 3) {
+    for (var x = 1; x <= 47; x += 3) {
+        for (var z = 1; z <= 47; z += 3) {
             var randNumber = Math.ceil(Math.random() * 5);
 
             if (randNumber == 1) {
@@ -125,7 +114,10 @@ function ShockInitialize () {
                 for (var startX = x; startX < x + 3; startX++) {
                     for (var startZ = z; startZ < z + 3; startZ ++) {
                         curBlock = world.getDimension("overworld").getBlock({x: startX, y: curY, z: startZ});
-
+                        
+                        if (curBlock === undefined) {
+                            continue;
+                        }
                         curBlock.setPermutation(curPermutation);
 
                         
@@ -137,11 +129,11 @@ function ShockInitialize () {
 }
 function ShockDeliver () {
   //  world.sendMessage(blockDelay[0][0].toString());
-    for (var startx = 1; startx <= 50; startx++) {
-        for (var startz = 1; startz <= 50; startz++) {
+    for (var startx = 1; startx <= 48; startx++) {
+        for (var startz = 1; startz <= 48; startz++) {
             curBlock = curBlock = world.getDimension("overworld").getBlock({x: startx, y: curY, z: startz});
             
-            if (curBlock.permutation == "undefined") {
+            if (curBlock === undefined) {
                 continue;
             }
             if (curBlock.permutation == curPermutation || curBlock.permutation == seaLanternPermutation) {
@@ -151,6 +143,11 @@ function ShockDeliver () {
                 
                 if (blockDelay[startx][startz] == 75) {
                     curBlock.setPermutation(BlockPermutation.resolve("minecraft:sea_lantern"));
+
+                    for (let i = 0; i < 1; i++) {
+                        world.getDimension("overworld").spawnParticle("minecraft:rising_border_dust_particle", {x: startx, y: curY, z: startz}, null);
+                    }
+                    
                 }
                 if (blockDelay[startx][startz] == 100) {
                  //   world.sendMessage("in");
@@ -165,11 +162,44 @@ function ShockDeliver () {
 }
 function DamagePlayer () {
     curBlock = world.getDimension("overworld").getBlock({x: Math.floor(player.location.x), y: -60, z: Math.floor(player.location.z)});
+    if (curBlock === undefined) {
+        return;
+    }
     if (curBlock.permutation == seaLanternPermutation) {
         world.getDimension("overworld").runCommand("damage @p 6");
     }
 }
+world.afterEvents.entityDie.subscribe(event=> {
+    if (event.deadEntity.typeId == "minecraft:vindicator") {
+        world.sendMessage("WUMPUS : seems like u kinda can fight a bit. lemme go a bit harder :)")
+        world.getDimension("overworld").spawnEntity("minecraft:ravager", event.deadEntity.location);
+    }
+    if (event.deadEntity.typeId == "minecraft:pillager") {
+        aliveMinions--;
 
+        if (aliveMinions < 0) {
+            aliveMinions = 0;
+        }
+    }
+});
+function SummonMinions () {
+    var randx = Math.ceil(Math.random() * 48);
+    var randz = Math.ceil(Math.random() * 48);
+
+    world.sendMessage("Wumpus: Send in the SQUAD");
+
+    aliveMinions = 0;
+
+    while (aliveMinions < 5) {
+        randx = Math.ceil(Math.random() * 48);
+        randz = Math.ceil(Math.random() * 48);
+
+        world.getDimension("overworld").spawnEntity("minecraft:pillager", {x: randx, y: -59, z: randz});
+
+        aliveMinions++;
+    }
+
+}
 function mainTick () {
     if (system.currentTick % 1 == 0) {
         if (system.currentTick % 200 == 0) {
@@ -179,6 +209,9 @@ function mainTick () {
         system.run(ShockDeliver);
         if (system.currentTick % 10 == 0) {
             system.run(DamagePlayer);
+        }
+        if (system.currentTick % 800 == 0) {
+            system.run(SummonMinions);
         }
         
     } 
