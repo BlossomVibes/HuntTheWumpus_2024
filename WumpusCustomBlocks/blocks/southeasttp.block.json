@@ -1,0 +1,26 @@
+{
+	"format_version": "1.20.20",
+	"minecraft:block": {
+		"description": {
+			"identifier": "wumpus:southeasttp",
+			"menu_category": {
+				"category": "construction"
+			}
+		},
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:selection_box": true,
+			"minecraft:destructible_by_mining": false,
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:geometry": "geometry.southeasttp",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "southeasttp",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:map_color": "#7d7d7d",
+			"minecraft:loot": "loot_tables/blocks/southeasttp.json"
+		}
+	}
+}

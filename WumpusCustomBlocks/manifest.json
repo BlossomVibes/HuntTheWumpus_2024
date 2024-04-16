@@ -1,0 +1,29 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "WumpusCustomBlocks",
+		"description": "WumpusCustomBlocks Behavior Pack",
+		"uuid": "db08dded-7e55-5edc-1f19-5adac5534636",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"generated_with": {
+			"blockbench_block_wizard": ["1.2.2"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Behavior",
+			"version": [1, 0, 0],
+			"uuid": "1c1549b9-e712-2888-af11-bf7c46d1023e",
+			"type": "data"
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "894195d2-65c0-0496-8bbb-f69fb037274a",
+			"version": [1, 0, 0]
+		}
+	]
+}

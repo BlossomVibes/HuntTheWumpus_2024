@@ -1,0 +1,28 @@
+{
+	"format_version": "1.20.20",
+	"minecraft:block": {
+		"description": {
+			"identifier": "wumpus:northtp",
+			"menu_category": {
+				"category": "construction"
+			}
+		},
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:selection_box": true,
+			"minecraft:destructible_by_mining": false,
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 200
+			},
+			"minecraft:geometry": "geometry.northtp",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "northtp",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:map_color": "#101010",
+			"minecraft:loot": "loot_tables/blocks/northtp.json"
+		}
+	}
+}

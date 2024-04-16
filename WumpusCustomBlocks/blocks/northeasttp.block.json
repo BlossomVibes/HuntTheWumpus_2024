@@ -1,0 +1,26 @@
+{
+	"format_version": "1.20.20",
+	"minecraft:block": {
+		"description": {
+			"identifier": "wumpus:northeasttp",
+			"menu_category": {
+				"category": "construction"
+			}
+		},
+		"components": {
+			"minecraft:collision_box": true,
+			"minecraft:selection_box": true,
+			"minecraft:destructible_by_mining": false,
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:geometry": "geometry.northeasttp",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "northeasttp",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:map_color": "#ffffff",
+			"minecraft:loot": "loot_tables/blocks/northeasttp.json"
+		}
+	}
+}
