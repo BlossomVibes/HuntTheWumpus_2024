@@ -9,6 +9,7 @@ var pitRooms = [];
 var chestRooms = [];
 var chestOpenedRooms = [];
 console.log(wumpusRoom);
+var adjIndex = 0;
 var curMap = [[37, 37, 38,37, 37, 38,37, 37, 38,37, 37, 38,37, 37, 38,37, 37, 38], [20, 51, 94], [146, 143, 282]]; // for example, this will spawn a small grid made out of bedrock, beacons, and other blocks.
 // this big giant array is a list of all block ID's in minecraft, for calling via blockPermutation function.
 // we have a mechanism (directly from the mock version) where you can build maps directly from a 2d array into minecraft(meaning you can build maps without having to touch minecraft at all.)
@@ -21,7 +22,16 @@ var northeast = BlockPermutation.resolve("wumpus:northeasttp");
 var northwest = BlockPermutation.resolve("wumpus:northwesttp");
 var southeast = BlockPermutation.resolve("wumpus:southeasttp");
 var southwest = BlockPermutation.resolve("wumpus:southwesttp");
-var keys;
+var keys = 0;
+var roomStatus = 0; 
+// roomstatus: 0, offline. all other numbers the player is playing the game.
+// 1: player is playing the game, and the key guardian has not been killed. continue to spawn mobs.
+// 2: player is playing the game, and the key guardian has been killed. This means that mobs will no longer 
+// continue to spawn. 
+// 3: player is playing the game, and they have fallen into a pit. They are currently trying to get out of the pit.
+// 4: The player is playing the game, and they are trying to run from the wumpus.
+// 5: Player is playing the game, and they are fighting the wumpus. 
+// 6+, this means that the player is doing a secret discovery. Each secret discovery will be hashed into a different number.
 
 var adjRooms = [
     [],
@@ -74,9 +84,26 @@ world.afterEvents.entityDie.subscribe(event=> {
         keys++;
     }
 });
+world.afterEvents.itemUse.subscribe(event=> {
+    if (event.itemStack.nameTag == "Game Start") {
+        world.sendMessage("StartingWumpus!");
+
+        system.run(initializeRooms);
+
+        roomStatus = 1;
+
+        world.getDimension("overworld").spawnEntity("wumpus:key_guardian", {x: -30, y: -59, z: -30});
+    }
+});
 const player = getPlayer();
+
+function runMobSpawning () {
+    
+}
 function initializeRooms () {
     keys = 0;
+    currentPlayerRoom = Math.ceil(Math.random() * 30);
+    wumpusRoom = Math.ceil(Math.random() * 30);
     var suggestedRoom = currentPlayerRoom;
     while (currentPlayerRoom == wumpusRoom) {
     wumpusRoom = Math.ceil(Math.random() * 30);
@@ -187,9 +214,7 @@ function generateArena (startx, starty, startz, endx, endy, endz) {
 }
 // stubbed functions for now.
 // will work on organizing into a generation class, a gamecontrol class, a wumpus class, and a player class.
-function movePlayer () {
-    // moves the player. Checks player location and moves player depending on where it is.
-}
+
 function InitalizeArena () {
 // generates randomized arena and each node's preset room theme.
 }
@@ -312,7 +337,25 @@ function CopyArena (startx, starty, startz) {
     world.sendMessage("sucessful generation");
     // a alternate way to debug that doesn't require debugger is to just use print statements to see where the code eexecutes properly;
 }
-function mainTick() {
+function movePlayer () {
+    player.teleport({x: -19, y: -59, z: -19});
+
+    currentPlayerRoom = adjRooms[currentPlayerRoom][adjIndex];
+
+    world.sendMessage("you are in room " + currentPlayerRoom.toString());
+
+    system.run(BatCutscene);
+    if (system.run(MoveIntoPit)) {
+       // roomStatus = 3;
+    }
+
+   system.run(BatsAreClose);
+   system.run(PitsAreClose);
+  // system.run(GameControl);
+
+    world.getDimension("overworld").spawnEntity("wumpus:key_guardian", {x: -30, y: -59, z: -30});
+}
+function mainRoomFunction() {
     var player = getPlayer();
     var playerX;
     var playerY;
@@ -336,17 +379,10 @@ function mainTick() {
                 keys--;
                 world.sendMessage("northeast");
 
-           player.teleport({x: -19, y: -60, z: -19});
+                adjIndex = 0;
 
-           currentPlayerRoom = adjRooms[currentPlayerRoom][0];
+                system.run(movePlayer);
 
-           
-           world.sendMessage("you are in room " + currentPlayerRoom.toString());
-
-            system.run(BatCutscene);
-            system.run(MoveIntoPit);
-           system.run(BatsAreClose);
-           system.run(PitsAreClose);
             }
             
         }
@@ -358,16 +394,9 @@ function mainTick() {
                 keys--;
                 world.sendMessage("north");
 
-           player.teleport({x: -19, y: -60, z: -19});
+                adjIndex = 1;
 
-           currentPlayerRoom = adjRooms[currentPlayerRoom][1];
-
-           world.sendMessage("you are in room " + currentPlayerRoom.toString());
-
-           system.run(BatCutscene);
-            system.run(MoveIntoPit);
-           system.run(BatsAreClose);
-           system.run(PitsAreClose);
+                system.run(movePlayer);
             }
             
         }
@@ -379,16 +408,9 @@ function mainTick() {
                 keys--;
                 world.sendMessage("northwest");
 
-           player.teleport({x: -19, y: -60, z: -19});
+                adjIndex = 2;
 
-           currentPlayerRoom = adjRooms[currentPlayerRoom][2];
-
-           world.sendMessage("you are in room " + currentPlayerRoom.toString());
-
-           system.run(BatCutscene);
-            system.run(MoveIntoPit);
-           system.run(BatsAreClose);
-           system.run(PitsAreClose);
+                system.run(movePlayer);
             }
             
         }
@@ -400,16 +422,9 @@ function mainTick() {
                 keys--;
                 world.sendMessage("south");
 
-           player.teleport({x: -19, y: -60, z: -19});
+                adjIndex = 3;
 
-           currentPlayerRoom = adjRooms[currentPlayerRoom][3];
-
-           world.sendMessage("you are in room " + currentPlayerRoom.toString());
-
-           system.run(BatCutscene);
-            system.run(MoveIntoPit);
-           system.run(BatsAreClose);
-           system.run(PitsAreClose);
+                system.run(movePlayer);
             }
             
         }
@@ -421,16 +436,9 @@ function mainTick() {
                 keys--;
                 world.sendMessage("southwest");
 
-                player.teleport({x: -19, y: -60, z: -19});
-     
-                currentPlayerRoom = adjRooms[currentPlayerRoom][4];
-     
-                world.sendMessage("you are in room " + currentPlayerRoom.toString());
-     
-                system.run(BatCutscene);
-                 system.run(MoveIntoPit);
-                system.run(BatsAreClose);
-                system.run(PitsAreClose);
+                adjIndex = 4;
+
+                system.run(movePlayer);
             }
           
         }
@@ -442,23 +450,44 @@ function mainTick() {
                 keys--;
                 world.sendMessage("southeast");
 
-           player.teleport({x: -19, y: -60, z: -19});
+                adjIndex = 5;
 
-           currentPlayerRoom = adjRooms[currentPlayerRoom][5];
-
-           world.sendMessage("you are in room " + currentPlayerRoom.toString());
-
-           system.run(BatCutscene);
-            system.run(MoveIntoPit);
-           system.run(BatsAreClose);
-           system.run(PitsAreClose);
+                system.run(movePlayer);
             }
             
         }
     }
-    system.run(mainTick);
 }
-system.run(initializeRooms);
-//system.run(generateArena(10, -50, 10, 40, -45, 40));
-//system.run(CopyArena(30, 1, 30));
-system.run(mainTick);
+
+function spawnMobs() {
+    for (var i = 0; i < 6; i++) {
+
+    }
+}
+
+function GameControl () {
+    if (roomStatus == 1) {
+        system.run(mainRoomFunction);
+
+        if (system.currentTick % 600 == 0) {
+            system.run(spawnMobs);
+        }
+    }
+    else if (roomStatus == 2) {
+        
+    }
+    else if (roomStatus == 3) {
+      //  system.run(pitFunction);
+    }
+    else if (roomStatus == 4) {
+       // system.run(WumpusChase);
+    }
+    else if (roomStatus == 5) {
+    //    system.run(WumpusFight);
+    } 
+    else if (roomStatus > 5) {
+        
+    }
+    system.run(GameControl);
+}
+system.run(GameControl);
