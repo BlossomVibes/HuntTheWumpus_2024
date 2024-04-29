@@ -1,0 +1,29 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "KeyGuardian",
+		"description": "KeyGuardian Behavior Pack",
+		"uuid": "f23f83d0-26ef-713a-4cec-d08c9bd0c1ac",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"generated_with": {
+			"blockbench_entity_wizard": ["1.4.0"]
+		}
+	},
+	"modules": [
+		{
+			"description": "Behavior",
+			"version": [1, 0, 0],
+			"uuid": "6118289e-d1d6-31b0-0ea2-c86f26eab83a",
+			"type": "data"
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "06fa051a-34d1-b7c4-63c7-098805f58000",
+			"version": [1, 0, 0]
+		}
+	]
+}

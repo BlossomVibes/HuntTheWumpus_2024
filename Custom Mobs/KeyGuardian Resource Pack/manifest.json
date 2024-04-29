@@ -1,0 +1,23 @@
+{
+	"format_version": 2,
+	"header": {
+		"name": "KeyGuardian",
+		"description": "KeyGuardian Resource Pack",
+		"uuid": "06fa051a-34d1-b7c4-63c7-098805f58000",
+		"version": [1, 0, 0],
+		"min_engine_version": [1, 16, 0]
+	},
+	"metadata": {
+		"generated_with": {
+			"blockbench_entity_wizard": ["1.4.0"]
+		}
+	},
+	"modules": [
+		{
+			"description": "KeyGuardian",
+			"type": "resources",
+			"uuid": "96d27ac0-1d65-323d-2da9-723e899e6891",
+			"version": [1, 0, 0]
+		}
+	]
+}

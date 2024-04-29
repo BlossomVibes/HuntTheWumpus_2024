@@ -1,0 +1,22 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "wumpus:key_guardian",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/entity/key_guardian"
+			},
+			"geometry": {
+				"default": "geometry.key_guardian"
+			},
+			"render_controllers": ["controller.render.default"],
+			"spawn_egg": {
+				"base_color": "#08c1e5",
+				"overlay_color": "#55d303"
+			}
+		}
+	}
+}
